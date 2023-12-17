@@ -1,51 +1,8 @@
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-}
+import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO, todos } from "./constants";
+import { TodoActionTypes } from "./types";
 
-const todos: Todo[] = [
-  {
-    id: 'c1a69b93-d3cb-49da-b736-87accbc7852f',
-    text: 'Understand What React Is',
-    completed: true,
-  },
-  {
-    id: 'b69ab839-0999-4bc6-a99c-ccc011be6ef3',
-    text: 'Learn How to Set Up your Development Environment',
-    completed: false,
-  },
-];
+export const initialState = { todos };
 
-const initialState = { todos };
-
-const ADD_TODO = 'ADD_TODO';
-const REMOVE_TODO = 'REMOVE_TODO';
-const TOGGLE_TODO = 'TOGGLE_TODO';
-
-interface AddTodoAction  {
-  type: typeof ADD_TODO;
-  payload: {
-    id: string;
-    text: string;
-  };
-}
-
-interface RemoveTodoAction {
-  type: typeof REMOVE_TODO;
-  payload: {
-    id: string;
-  };
-}
-
-interface ToggleTodoAction {
-  type: typeof TOGGLE_TODO;
-  payload: {
-    id: string;
-  };
-}
-
-type TodoActionTypes = AddTodoAction | RemoveTodoAction | ToggleTodoAction;
 
 const todosReducer = (state = initialState, action: TodoActionTypes) => {
   switch (action.type) {
