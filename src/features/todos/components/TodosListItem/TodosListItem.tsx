@@ -4,6 +4,7 @@ import styles from './TodosListItem.module.css';
 
 import { ButtonRemove } from '@/components/ButtonRemove';
 import { Todo } from '../../types';
+import { store } from '../../../../store';
 
 type Props = {
   todo: Todo;
@@ -13,11 +14,11 @@ export const TodosListItem: FC<Props> = ({ todo: { id, text, completed } }) => {
   const completedClass = completed ? styles.todoTextThrough : '';
 
   const handleChange = () => {
-    console.log(`toggleTodoCompleted: ${id}`);
+    store.dispatch({ type: 'TOGGLE_TODO', payload: { id } });
   };
 
   const handleRemove = () => {
-    console.log(`removeTodo: ${id}`);
+    store.dispatch({ type: 'REMOVE_TODO', payload: { id } });
   };
 
   return (

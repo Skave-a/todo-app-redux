@@ -1,18 +1,27 @@
 import { FC, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './TodoForm.module.css';
 
 import { Button } from '@/components/Button';
+import { store } from '../../../../store';
 
 export const TodoForm: FC = () => {
   const [text, setText] = useState('');
+
+  const id = uuidv4();
 
   const handleClick = (): void => {
     const trimmedValue = text.trim();
 
     if (trimmedValue) {
-      console.log('Add new todo:', trimmedValue);
       setText('');
+      store.dispatch({
+        type: 'ADD_TODO',
+        payload: { id: id, text: trimmedValue, completed: false },
+      });
+
+      console.log(`addTodo: ${id}`);
     }
   };
 
